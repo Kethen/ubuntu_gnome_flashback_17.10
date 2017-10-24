@@ -1,4 +1,5 @@
 #!/bin/bash
+# by Katharine https://github.com/Kethen/
 #restore ubuntu environment
 function restore {
 	echo "Restoring ubuntu session"
