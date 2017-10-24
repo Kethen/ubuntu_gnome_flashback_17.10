@@ -14,6 +14,10 @@ function restore {
 	fi;\
 	#restore gdm theme to ubuntu theme
 	update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/gnome-shell.css 5&&\
+	usermod gdm -s /bin/bash&&\
+	su gdm -c "gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/warty-final-ubuntu.png"&&\
+	su gdm -c "gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgrounds/warty-final-ubuntu.png"&&\
+	usermod gdm -s /bin/false&&\
 	#reinstall packages
 	apt install ubuntu-desktop -y&&\
 	#remove extra files created too bootstrap gnome theming settings
@@ -61,6 +65,10 @@ function transform {
 	echo "Name=GNOME on Xorg (Backup)" >> $GNOME_DESKTOP_FILE_DUP&&\
 	#setting gdm theme
 	update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/gnome-shell.css 15&&\
+	usermod gdm -s /bin/bash&&\
+	su gdm -c "gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/gnome/adwaita-day.jpg"&&\
+	su gdm -c "gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgrounds/gnome/adwaita-lock.jpg"&&\
+	usermod gdm -s /bin/false&&\
 	#theme
 	apt remove --purge dmz-cursor-theme ubuntu-artwork ubuntu-sounds -y&&\
 	apt install gnome-backgrounds -y&&\
