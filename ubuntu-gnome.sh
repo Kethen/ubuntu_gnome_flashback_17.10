@@ -9,9 +9,9 @@ function restore {
 	if [ "$REMOVE_GNOME" = "y" ];\
 	then
 		echo "Removing gnome-session"&&\
-		apt remove --purge gnome-session gnome-backgrounds gnome-tweak-tool -y;\
-		rm -f /usr/share/xsessions/gnome-xorg-backup.desktop&&\
-	fi
+		apt remove --purge gnome-session gnome-backgrounds gnome-tweak-tool -y&&\
+		rm -f /usr/share/xsessions/gnome-xorg-backup.desktop;\
+	fi;\
 	#restore gdm theme to ubuntu theme
 	update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/gnome-shell.css 5&&\
 	#reinstall packages
