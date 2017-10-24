@@ -2,6 +2,7 @@ Ubuntu Gnome Flashback
 -----
 A short script that tries to make ubuntu 17.10 as close to discontinued flavor ubuntu gnome as possible
 -----
+Transform and Restore tested on 10/24/2017 with a fresh ubuntu 17.10 install
 Important:
 
 If you want to be absolutely safe during a release upgrade (say, 18.04 when it releases), run 
