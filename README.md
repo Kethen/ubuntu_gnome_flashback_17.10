@@ -4,7 +4,15 @@ A short script that tries to make ubuntu 17.10 as close to discontinued flavor u
 -----
 Important:
 
-If you want to be absolutely safe during a release upgrade (say, 18.04 when it releases), run ubuntu-gnome.sh restore.
+If you want to be absolutely safe during a release upgrade (say, 18.04 when it releases), run 
+
+	bash ubuntu-gnome.sh restore
+	
+or
+
+	./ubuntu-gnome.sh restore
+
+as pointed out here http://community.ubuntu.com/t/restoring-ubuntu-gnome-experience-in-17-10-reference-steps/1016/7
 
 Description:
 
