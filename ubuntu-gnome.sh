@@ -37,8 +37,6 @@ function transform {
 		exit 0
 	fi
 	sudo bash -c '
-	#setting gdm theme
-	update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/gnome-shell.css 15&&\
 	#apt update
 	apt update&&\
 	#install gnome session and remove ubuntu session
@@ -52,6 +50,8 @@ function transform {
 	sed -i "/Exec=/d" $GNOME_DESKTOP_FILE&&\
 	echo "Exec=gnome-session --session=gnome" >> $GNOME_DESKTOP_FILE&&\
 	echo "TryExec=gnome-session" >> $GNOME_DESKTOP_FILE&&\
+	#setting gdm theme
+	update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/gnome-shell.css 15&&\
 	#theme
 	apt remove --purge dmz-cursor-theme ubuntu-artwork ubuntu-sounds -y&&\
 	apt install gnome-backgrounds -y&&\
