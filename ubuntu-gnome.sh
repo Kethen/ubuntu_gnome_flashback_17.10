@@ -1,4 +1,4 @@
-
+#!/bin/bash
 #restore ubuntu environment
 function restore {
 	echo "Restoring ubuntu session"
@@ -8,15 +8,17 @@ function restore {
 	if [ "$REMOVE_GNOME" = "y" ];\
 	then
 		echo "Removing gnome-session"&&\
-		sudo apt remove --purge gnome-session gnome-backgrounds gnome-tweak-tool -y&&\
-	done
+		apt remove --purge gnome-session gnome-backgrounds gnome-tweak-tool -y;\
+	fi
 	#restore gdm theme to ubuntu theme
-	sudo update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/gnome-shell.css 5&&\
+	update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/gnome-shell.css 5&&\
 	#reinstall packages
-	sudo apt install ubuntu-desktop -y&&\
+	apt install ubuntu-desktop -y&&\
 	#remove extra files created too bootstrap gnome theming settings
 	rm -f /usr/share/ubuntu-gnome-init.sh /etc/xdg/autostart/ubuntu-gnome-init.desktop&&\
-	echo "Done"
+	echo "Done, please reboot to see changes"&&\
+	echo "If you had removed gnome-session, you current wallpaper might be missing"&&\
+	echo "Do not worry just set it back manually"
 	'
 }
 
@@ -36,7 +38,7 @@ function transform {
 	fi
 	sudo bash -c '
 	#setting gdm theme
-	sudo update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/gnome-shell.css 15&&\
+	update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/gnome-shell.css 15&&\
 	#apt update
 	apt update&&\
 	#install gnome session and remove ubuntu session
@@ -56,7 +58,7 @@ function transform {
 	apt remove --purge adium-theme-ubuntu light-themes -y&&\
 	#bootstrap gnome theming with a script
 	GNOME_SETTINGS_INIT=/usr/share/ubuntu-gnome-init.sh;\
-	echo "if ! [ -f ~/.config/ubuntu-gnome-initialized ]" > $GNOME_SETTINGS_INIT&&\
+	echo "if ! [ -f ~/.config/ubuntu-gnome-initialized ] && [ \"\$XDG_CURRENT_DESKTOP\" = \"GNOME\" ]" > $GNOME_SETTINGS_INIT&&\
 	echo "then" >> $GNOME_SETTINGS_INIT&&\
 	echo "gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/gnome/adwaita-day.jpg" >> $GNOME_SETTINGS_INIT&&\
 	echo "gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgrounds/gnome/adwaita-lock.jpg" >> $GNOME_SETTINGS_INIT&&\
@@ -71,7 +73,7 @@ function transform {
 	echo "Type=Application" >> $GNOME_SETTINGS_INIT_DESKTOP_FILE&&\
 	echo "Name=Ubuntu Gnome First Time Initialization" >> $GNOME_SETTINGS_INIT_DESKTOP_FILE&&\
 	echo "Exec=bash $GNOME_SETTINGS_INIT" >> $GNOME_SETTINGS_INIT_DESKTOP_FILE&&\
-	echo "done"
+	echo "Done, please reboot to see changes"
 	'
 }
 if [ "$1" = "restore" ]
