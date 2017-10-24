@@ -29,6 +29,8 @@ function transform {
 	echo "This script works for a fresh ubuntu 17.10 install as of 10/24/2017"
 	echo "This might or might not work properly for future ubuntu versions"
 	echo "Incase your installation is not a FRESH INSTALL of 17.10 or not even 17.10, be cautious when you perform \'apt autoremove\' in the future. Run that after this script and carefully examine packages that your system is trying to get rid of. \'apt install\' packages you wish to keep to mark them as manually installed"
+	echo "Please run restore before a distribution upgrade"
+	echo "Todo: See if it dies after a distribution upgrade without a restore"
 	echo ""
 	echo "do you wish to continue?[y/N]"
 	read kbd

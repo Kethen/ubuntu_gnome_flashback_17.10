@@ -2,6 +2,10 @@ Ubuntu Gnome Flashback
 -----
 A short script that tries to make ubuntu 17.10 as close to discontinued flavor ubuntu gnome as possible
 -----
+Important:
+
+If you want to be absolutely safe during a release upgrade (say, 18.04 when it releases), run ubuntu-gnome.sh restore.
+
 Description:
 
 This script does 3 things
