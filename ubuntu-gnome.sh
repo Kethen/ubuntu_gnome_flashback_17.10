@@ -10,6 +10,7 @@ function restore {
 	then
 		echo "Removing gnome-session"&&\
 		apt remove --purge gnome-session gnome-backgrounds gnome-tweak-tool -y;\
+		rm -f /usr/share/xsessions/gnome-xorg-backup.desktop&&\
 	fi
 	#restore gdm theme to ubuntu theme
 	update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/gnome-shell.css 5&&\
@@ -50,9 +51,14 @@ function transform {
 	apt remove --purge gsettings-ubuntu-schemas -y&&\
 	#fix gnome xorg session launch .desktop file
 	GNOME_DESKTOP_FILE=/usr/share/xsessions/gnome-xorg.desktop;\
+	GNOME_DESKTOP_FILE_DUP=/usr/share/xsessions/gnome-xorg-backup.desktop;\
 	sed -i "/Exec=/d" $GNOME_DESKTOP_FILE&&\
 	echo "Exec=gnome-session --session=gnome" >> $GNOME_DESKTOP_FILE&&\
 	echo "TryExec=gnome-session" >> $GNOME_DESKTOP_FILE&&\
+	#create a just in case desktop file if the one with fix applied gets replaced by a package update
+	cp -a $GNOME_DESKTOP_FILE $GNOME_DESKTOP_FILE_DUP&&\
+	sed -i "/Name=/d" $GNOME_DESKTOP_FILE_DUP&&\
+	echo "Name=GNOME on Xorg (Backup)" >> $GNOME_DESKTOP_FILE_DUP&&\
 	#setting gdm theme
 	update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/gnome-shell/theme/gnome-shell.css 15&&\
 	#theme

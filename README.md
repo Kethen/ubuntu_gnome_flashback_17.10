@@ -37,6 +37,8 @@ To revert back to ubuntu
 	or
 	bash ubuntu-gnome.sh restore
 	
+Note:
 
 sh(dash) does not run the script properly, so don't sh ubuntu-gnome.sh
 
+Currently /usr/share/xsession/gnome-xorg.desktop does not properly launch a session without --session=gnome parameter was set for gnome-session while ubuntu-session was removed. The script does try to remedy that by editing the file but in case of an update of gnome-session breaks the system, a separated .desktop file was created to supply the session entry "Gnome on Xorg (Backup)".
